@@ -96,15 +96,6 @@ function applyFilters(viewId) {
     const sBulan = document.getElementById('filter-bulan')?.value || '';
     const sTahun = document.getElementById('filter-tahun')?.value || '';
 
-    // KHUSUS MENU KEHADIRAN SISWA: Minta Filter Kelas Terlebih Dahulu
-    if (viewId === 'kehadiran_siswa') {
-        const kelasValue = CURRENT_USER.role === 'Guru' ? CURRENT_USER.kelas_binaan : sKelas;
-        if (!kelasValue) {
-            document.getElementById('table-body').innerHTML = `<tr><td colspan="${TABLE_CONFIG[viewId].headers.length + 2}" class="text-center text-primary fw-bold py-4"><i class="bi bi-info-circle me-2"></i>Silakan pilih Filter Kelas terlebih dahulu untuk menampilkan data siswa.</td></tr>`;
-            return;
-        }
-    }
-
     // Otomatis Filter Kelas Binaan Khusus Guru (Keamanan Ganda)
     if (CURRENT_USER.role === 'Guru' && ['data_siswa', 'kehadiran_siswa', 'pelanggaran', 'uks'].includes(viewId)) {
         data = data.filter(row => row.kelas === CURRENT_USER.kelas_binaan || row.pilih_kelas === CURRENT_USER.kelas_binaan);
