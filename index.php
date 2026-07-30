@@ -73,7 +73,7 @@ if (!in_array($view, $allowed_views)) {
         const CURRENT_USER = <?= json_encode($user) ?>;
         const SEKOLAH_INFO = <?= json_encode($sekolahInfo) ?>;
     </script>
-    <script src="assets/app.js"></script>
+    <script src="assets/app.js?v=<?= time() ?>"></script>
 </body>
 
 </html>
